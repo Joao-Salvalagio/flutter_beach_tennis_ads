@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beachup/models/club_model.dart';
 
 class ClubListScreen extends StatefulWidget {
   const ClubListScreen({super.key});
@@ -9,6 +10,34 @@ class ClubListScreen extends StatefulWidget {
 
 class _ClubListScreenState extends State<ClubListScreen> {
   String urlLogo = "https://www.cvtc.com.br/image/beachtennis.jpg";
+  
+  List<ClubModel> clubList = [
+    ClubModel(
+      nome: "Orla Beach Tennis", 
+      cidade: "Maringá", 
+      estado: "PR", 
+      cobertura: "Sem cobertura", 
+      preco: 2.99, 
+      urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
+      ),
+    ClubModel(
+      nome: "Orla Beach Tennis", 
+      cidade: "Maringá", 
+      estado: "PR", 
+      cobertura: "Sem cobertura", 
+      preco: 2.99, 
+      urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
+      ),
+    ClubModel(
+      nome: "Orla Beach Tennis", 
+      cidade: "Maringá", 
+      estado: "PR", 
+      cobertura: "Sem cobertura", 
+      preco: 2.99, 
+      urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
+      )
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +80,16 @@ class _ClubListScreenState extends State<ClubListScreen> {
                             child: Icon (Icons.search)
                             ),
                           Expanded(
-                          flex: 1,
-                          child: TextField()
+                          flex: 9,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Pesquise aqui...",
+                                border: InputBorder.none
+                              ),
+                            ),
+                          )
                           ),
                         ],
                       ),
@@ -74,7 +111,33 @@ class _ClubListScreenState extends State<ClubListScreen> {
           ),
           Expanded(
             flex: 6,
-            child: Placeholder(),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  spacing: 10,
+                  children: clubList.map((club) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.amber,
+                    ),
+                    height: 175,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Placeholder()
+                          ),
+                        Expanded(
+                          flex: 3,
+                          child: Placeholder()
+                          )
+                      ],
+                    ),
+                  )).toList(),
+                ),
+              ),
+            ),
           ),
         ],
       ),

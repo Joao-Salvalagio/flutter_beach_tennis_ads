@@ -21,7 +21,7 @@ class _ClubListScreenState extends State<ClubListScreen> {
       urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
       ),
     ClubModel(
-      nome: "Orla Beach Tennis", 
+      nome: "Sarandi Beach", 
       cidade: "Maringá", 
       estado: "PR", 
       cobertura: "Sem cobertura", 
@@ -29,7 +29,7 @@ class _ClubListScreenState extends State<ClubListScreen> {
       urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
       ),
     ClubModel(
-      nome: "Orla Beach Tennis", 
+      nome: "Paiçandu Beach", 
       cidade: "Maringá", 
       estado: "PR", 
       cobertura: "Sem cobertura", 
@@ -37,9 +37,22 @@ class _ClubListScreenState extends State<ClubListScreen> {
       urlImagem: "https://static.sportit.com.br/public/sportit/imagens/produtos/quadra-de-beach-tennis-sport-it-m2-2946.jpg"
       )
   ];
+
+  List<ClubModel> currentList = [];
+
+  TextEditingController pesquisaController = TextEditingController();
+
+  void searchClubs(){
+      String pesquisa = pesquisaController.text.toUpperCase();
+      currentList = clubList
+      .where((club) => club.nome!.toUpperCase().contains(pesquisa))
+      .toList();
+  }
   
   @override
   Widget build(BuildContext context) {
+    searchClubs();
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 228, 228, 228),
       body: Column(
@@ -84,6 +97,8 @@ class _ClubListScreenState extends State<ClubListScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 5),
                             child: TextField(
+                              controller: pesquisaController,
+                              onChanged: (value) => setState(() {}),
                               decoration: InputDecoration(
                                 hintText: "Pesquise aqui...",
                                 border: InputBorder.none
@@ -116,7 +131,7 @@ class _ClubListScreenState extends State<ClubListScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   spacing: 10,
-                  children: clubList.map((club) => Container(
+                  children: currentList.map((club) => Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
